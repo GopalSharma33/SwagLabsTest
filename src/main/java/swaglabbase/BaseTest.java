@@ -66,6 +66,7 @@ public class BaseTest {
             String logText = "Test Case: "+ methodName + "Pass";
             Markup n = MarkupHelper.createLabel(logText, ExtentColor.GREEN);
             logger.log(Status.PASS,n);
+
         }
         else if(result.getStatus()==ITestResult.FAILURE){
             String methodName = result.getMethod().getMethodName();
