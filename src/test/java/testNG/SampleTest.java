@@ -11,6 +11,7 @@ import java.lang.reflect.Method;
 public class SampleTest extends BaseTest {
     LoginTest loginTest;
     HomePage homePage;
+
     AddToCard addToCard;
     ValidateManuButton validateManuButton;
     ValidateFaceBookPage validateFaceBookPage;
