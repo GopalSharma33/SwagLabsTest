@@ -8,13 +8,16 @@ import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
+import pages.NetworkCall;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -50,10 +53,16 @@ public class BaseTest {
 
         String browser=properties.getProperty("Browser");
         System.out.println(browser);
+         WebDriverManager.chromedriver().setup();
+//        System.setProperty("webdriver.chrome.driver","C:\\Users\\vinayak\\Desktop\\chromedriver.exe");
+        ChromeOptions options=new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
 
-        System.setProperty("webdriver.chrome.driver","C:\\Users\\vinayak\\Desktop\\chromedriver.exe");
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(options);
+
+        NetworkCall networkCall = new NetworkCall();
         logger = extent.createTest(testMethod.getName());
+        networkCall.gg();
         driver.manage().window().maximize();
         driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
